@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiedsonF-Portfólio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000, #1c1c1c);
+            color: #fff;
+            line-height: 1.6;
+            overflow: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Loader Styles */
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #000, #1c1c1c);
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f39c12;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .home {
+            position: relative;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mini-cube {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-left: 10px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-radius: 3px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        .cube {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+            animation: rotateCube 10s infinite linear;
+        }
+
+        .cube div {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #fff;
+        }
+
+        .cube .front  { transform: translateZ(75px); }
+        .cube .back   { transform: rotateY(180deg) translateZ(75px); }
+        .cube .right  { transform: rotateY(90deg) translateZ(75px); }
+        .cube .left   { transform: rotateY(-90deg) translateZ(75px); }
+        .cube .top    { transform: rotateX(90deg) translateZ(75px); }
+        .cube .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+        @keyframes rotateCube {
+            0% {
+                transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        .formations {
+            background: linear-gradient(135deg, #111, #333);
+            padding-top: 6rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .formation-card {
+            background: #222;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .formation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .formation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .about {
+            background: linear-gradient(135deg, #111, #444);
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about p {
+            max-width: 600px;
+        }
+
+        .contact-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.contact-buttons button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #f39c12;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-buttons button:hover {
+    background-color: #e67e22;
+}
+
+        footer {
+            padding: 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .home h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader" class="loader">Loading...</div>
+
+    <div id="main-content" class="hidden">
+        <header>
+            <nav class="navbar">
+                <div class="logo">LiedsonFC
+                    <div class="mini-cube"></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#formations">Formações</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="section home">
+            <div class="cube">
+                <div class="front"></div>
+                <div class="back"></div>
+                <div class="right"></div>
+                <div class="left"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+            <h1>Bem-vindo(a) ao Meu Portfólio</h1>
+        </section>
+
+       
+        <section id="formations" class="section formations">
+            <h2>Formações</h2>
+            <div class="grid">
+                <a href="certificados/Certificado .pdf" target="_blank" class="formation-card">
+                    HTML, CSS e JavaScript
+                </a>
+                <a href="certificados/certificate-microsoft-power-bi-para-business-intelligence-e-data-science-6462fe1b2bb04988150abc99.pdf" target="_blank" class="formation-card">
+                    Power BI e Data Science
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="section about">
+            <h2>Sobre mim</h2>
+            <p>Olá, meu nome é Liedson Fernando Chapiewsky, Sou um programador júnior com conhecimento em JavaScript, HTML, CSS, Python, DAX, SQL, 
+                também no uso de ferramentas como Power BI. Tenho interesse em desenvolvimento web, 
+                análise de dados e criação de soluções práticas e inovadoras. 
+                Busco continuamente aprimorar minhas habilidades e contribuir para projetos desafiadores.
+            </p>
+        </section>
+
+        <section id="contact" class="section contact">
+            <h2>Contato</h2>
+            <div class="contact-container">
+                <div class="contact-buttons">
+                    <!-- Botão que abre o Gmail -->
+                    <a href="https://mail.google.com/mail/u/0/#sent" target="_blank">
+                        <button>Envie-me um E-mail</button>
+                    </a>
+                    <!-- Botão que abre o LinkedIn -->
+                    <a href="https://www.linkedin.com/in/liedson-fernando-chapiewsky-7b0326345/" target="_blank">
+                        <button>Visite meu LinkedIn</button>
+                    </a>
+                </div>
+                <p class="contact-email">E-mail: <a href="mailto:liedsonfernandochapiewsky@gmail.com">liedsonfernandochapiewsky@gmail.com</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; Liedson F. Chapiewsky. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
